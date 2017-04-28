@@ -3,6 +3,9 @@
 
 load('April Test Data.mat')
 
+% Set the Strap Length (meters)
+strap = 0.15;
+
 % The accelerometers were slightly offset from each other when standing
 % still, this adjusts them so the means with no motion are equal
 angle_adjust = mean(a_bottom(1:90) - a_top(1:90));
@@ -29,7 +32,7 @@ x_rel = stepint(t_rel, v_rel);
 
 % Here we adjust the x position so that at the start of the cycle the
 % displacement is 0.
-x_rel = -1.*(x_rel - x_rel(1));
+x_rel = strap - (x_rel - x_rel(1));
 
 
 plot(t_rel, x_rel)
