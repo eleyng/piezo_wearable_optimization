@@ -1,6 +1,6 @@
 % position at a certain time
 
-function value = x(t);
-%t = [0:0.1:2];
-value = sin(t);
+function value = x(t)
+load('x_rel')
+value = x_rel(t);
 end

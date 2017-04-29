@@ -1,6 +1,5 @@
 %acceleration
-function value = a(t);
-%t = [0:0.1:2];
-c = 5;
-value = -sin(t) + c;
+function value = a(t)
+load('a_rel')
+value = a_rel(t);
 end

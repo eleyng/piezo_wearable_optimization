@@ -1,7 +1,6 @@
 %z_int
-function value = z_int(hpoly,hpiezo,z0)
-%load('constants');
+function value = z_int(hpoly,hpiezo,c,Ypoly)
 
-z_init = @z0;
-value = hpoly/2 + hpiezo/2 - abs(z_init(hpoly, hpiezo, c, Ypoly));
+value = hpoly/2 + hpiezo/2 - abs(z0(hpoly, hpiezo, c, Ypoly));
+
 end

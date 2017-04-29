@@ -1,0 +1,25 @@
+%i_tens
+
+function value = i_tens(t, dwarp, L0, e31, kwarp, hpiezo, c, hpoly, Ypoly, gweft)
+
+%time step
+int_t = 1/30;
+
+    function v1 = d_dz(t,dwarp)
+        if t == 0
+            v1 = 0;
+        else
+            v1 = dz(t,dwarp) - dz(t - int_t,dwarp);
+        end
+    end
+
+    function v2 = dlwarp(t,dwarp)
+        
+        v2 = 0.5 * ( (2*d_dz(t,dwarp))^2 + gweft^2 )^-0.5 * ( 2 * (2*d_dz(t,dwarp) * d_dz(t,dwarp) ) );
+    
+    end
+
+d_term = @dlwarp;
+value = ( 2*L0*e31*kwarp ) / ( hpiezo*c + hpoly*Ypoly ) * d_term(t,dwarp);
+
+end
