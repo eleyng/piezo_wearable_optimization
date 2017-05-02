@@ -9,5 +9,5 @@ function value = dx(t, n_weft)
 if t == 0
     value = 0;
 else
-    value = (x(t,n_weft) - x(t - 1,n_weft))/n_weft;
+    value = (x(t,n_weft) - x(t - 1,n_weft));
 end

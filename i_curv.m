@@ -11,6 +11,6 @@ function value = i_curv(t, b, hpoly, hpiezo, L0, e31, c, Ypoly, n_weft)
         
     end
 
-value = b*L0*e31*z_int(hpoly,hpiezo,c,Ypoly)*d_term(t, L0,n_weft);
+value = abs(b*L0*e31*z_int(hpoly,hpiezo,c,Ypoly)*d_term(t, L0,n_weft));
 
 end
