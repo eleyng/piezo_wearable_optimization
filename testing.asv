@@ -1,16 +1,44 @@
-load('constants')
+close all; clear all; clc;
+
+load('constants'); load('x_rel'); load('a_rel');
 time = 0:1/30:1/30*36;
-current_t = zeros(1,37);
+current_tot = zeros(1,37);
+current_curv = zeros(1,37);
+current_tens = zeros(1,37);
+current_ac = zeros(1,37);
 timestep=1/30;
-dwarp=3/1000;
-n_weft = round(s_length/dwarp);
+b = 3/1000;
+hpoly = 200 *10^-6; %micrometer
+hpiezo = 110 * 10^-6; %micrometer
+dwarp=0.5/1000;%.5 mm
+gweft = .2/1000; %.2mm
+n_weft = round(s_width/(gweft + b));
+n_warp = round(s_length/dwarp);
 L0 = dwarp*pi()/2;
+
+
 for i = 3:1:37
     %i_tot(t, dwarp, b, gweft, hpoly, hpiezo, L0, e31, kwarp, c, Ypoly, e33)
-    current_t(i)= i_tot(i,dwarp,3/1000, .2/1000, 200 *10^-6, 110 * 10^-6, L0,e31, kwarp, c, Ypoly, e33,n_weft);
-    %current(i)= i_curv(i, 200 *10^-6, 110 * 10^-6, c, Ypoly, 3/1000, L0, e31,n_weft);
-    i_tens(t, dwarp, L0, e31, kwarp, hpiezo, c, hpoly, Ypoly, gweft,n_weft)
-    i_ac(t, b, L0, e33, hpiezo, hpoly,n_weft)
+    current_tot(i) = i_tot(i, dwarp, b, gweft, hpoly, hpiezo, L0, e31, kwarp, c, Ypoly, e33,n_warp);
+    current_curv(i) = i_curv(i, b, hpoly, hpiezo, L0, e31, c, Ypoly, n_warp);
+    current_tens(i) = i_tens(i, dwarp, gweft, hpoly, hpiezo, L0, e31, kwarp,  c,  Ypoly, n_warp);
+    current_ac(i) = i_ac(i, b, hpoly, hpiezo, L0, e33, n_warp);
+    display(['dz:  ' , num2str(dz(i,dwarp,n_warp))])
+    display(['r:  ' , num2str(r(i,dwarp,n_warp))])
+    display( [num2str( (r(i,dwarp,n_warp) - ( dwarp + dx(i,n_warp) ) / ( 2*  abs(tan( pi*dwarp / (4*r(i,dwarp,n_warp))))  ) )), '  ', num2str(r(i,dwarp,n_warp) - ( dwarp + dx(i,n_warp) )), '   ', num2str(( dwarp + dx(i,n_warp) )), '   ', num2str(0.5*dwarp-r(i,dwarp,n_warp)) ] )
+
     
 end
-plot(time,current_t)
+figure (1)
+plot(time,current_tot,'c')
+hold on
+plot(time,current_curv, '*')
+hold on
+plot(time,current_tens, '^')
+hold on
+plot(time,current_ac, 'k')
+legend('total', 'i curve', 'i tens', 'i ac','Location', 'eastoutside');
+figure (2)
+time = 0:1/30:1/30*37;
+
+

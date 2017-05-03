@@ -1,5 +1,5 @@
 %acceleration
-function value = a(t,n_weft)
+function value = a(t,n_warp)
 load('a_rel')
-value = a_rel(t)/n_weft;
+value = a_rel(t)/n_warp;
 end
