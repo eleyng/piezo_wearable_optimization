@@ -5,15 +5,14 @@ load('constants'); load('x_rel'); load('a_rel'); load('v_rel');
 
 % INPUTS for Optimization Algorithm
 % Desired Warp Thread Diameter (meters)
-d = 0.0005;
 
 % CONSTRAINTS for Optimization Algorithm
 A = [];
 b = [];
-Aeq = [1, 0, 0, 0, 0];
-beq = d;
-lb = [0.1010/1000, 0.2, 0.2, 0.01, 0.01];
-ub = [1.0358/1000, 5, 5, 0.5, 0.5];
+Aeq = [];
+beq = [];
+lb = [0.2, 0.2, 0.01, 0.01];
+ub = [5, 5, 0.5, 0.5];
 % X0 = [d, 2, 2, 0.2, 0.2];
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,7 +26,7 @@ ub = [1.0358/1000, 5, 5, 0.5, 0.5];
  options = gaoptimset(@gamultiobj)
  setup = gaoptimset(options, 'PopulationSize', 5, 'Generations', 5)
 
-[Pareto, fVals] = gamultiobj(@objfun, 5, A, b, Aeq, beq, lb, ub);
+[Pareto, fVals] = gamultiobj(@objfun, 4, A, b, Aeq, beq, lb, ub);
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Plots
