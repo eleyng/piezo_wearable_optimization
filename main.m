@@ -24,6 +24,9 @@ ub = [1.0358/1000, 5, 5, 0.5, 0.5];
 % Call the NSGA optimizer
 % Pareto is a matrix of design variables - each row is a solution (P x 5)
 % fVals is a matrix of function values at the Pareto front (P x 2)
+ options = gaoptimset(@gamultiobj)
+ setup = gaoptimset(options, 'PopulationSize', 5, 'Generations', 5)
+
 [Pareto, fVals] = gamultiobj(@objfun, 5, A, b, Aeq, beq, lb, ub);
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,5 +35,5 @@ ub = [1.0358/1000, 5, 5, 0.5, 0.5];
 % Generate Pareto Frontier Plot
 figure();
 plot(fVals(:,1), fVals(:,2), 'ro');
-title('Pareto Frontier');
-xlabel('FIRST OUTPUT'), ylabel('SECOND OUTPUT');
+title('Pareto Frontier of Current vs Force');
+xlabel('Current'), ylabel('Force');

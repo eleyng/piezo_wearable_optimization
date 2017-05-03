@@ -11,10 +11,10 @@ d = 0.0005;
 A = [];
 b = [];
 Aeq = [1, 0, 0, 0, 0];
-beq = [d, 0, 0, 0, 0];
-lb = [0.1010/1000; 0.2; 0.2; 0.01; 0.01];
-ub = [1.0358/1000; 5; 5; 0.5; 0.5];
-X0 = [d, 2, 2, 0.2, 0.2]';
+beq = d;
+lb = [0.1010/1000, 0.2, 0.2, 0.01, 0.01];
+ub = [1.0358/1000, 5, 5, 0.5, 0.5];
+% X0 = [d, 2, 2, 0.2, 0.2];
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -24,6 +24,45 @@ X0 = [d, 2, 2, 0.2, 0.2]';
 % Call the NSGA optimizer
 % Pareto is a matrix of design variables - each row is a solution (P x 5)
 % fVals is a matrix of function values at the Pareto front (P x 2)
+ options = gaoptimset(@gamultiobj)
+ options
+ %'PopulationType', 'doubleVector',PopInitRange: []
+%         PopulationSize: []
+%             EliteCount: []
+%      CrossoverFraction: []
+%         ParetoFraction: []
+%     MigrationDirection: []
+%      MigrationInterval: []
+%      MigrationFraction: []
+%            Generations: []
+%              TimeLimit: []
+%           FitnessLimit: []
+%          StallGenLimit: []
+%              StallTest: []
+%         StallTimeLimit: []
+%                 TolFun: []
+%                 TolCon: []
+%      InitialPopulation: []
+%          InitialScores: []
+%     NonlinConAlgorithm: []
+%         InitialPenalty: []
+%          PenaltyFactor: []
+%           PlotInterval: []
+%            CreationFcn: []
+%      FitnessScalingFcn: []
+%           SelectionFcn: []
+%           CrossoverFcn: []
+%            MutationFcn: []
+%     DistanceMeasureFcn: []
+%              HybridFcn: []
+%                Display: []
+%               PlotFcns: []
+%             OutputFcns: []
+%             Vectorized: []
+%            UseParallel: [)
+         
+%options = gaoptimset()
+
 [Pareto, fVals] = gamultiobj(@objfun, 5, A, b, Aeq, beq, lb, ub);
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,5 +71,5 @@ X0 = [d, 2, 2, 0.2, 0.2]';
 % Generate Pareto Frontier Plot
 figure();
 plot(fVals(:,1), fVals(:,2), 'ro');
-title('Pareto Frontier');
-xlabel('FIRST OUTPUT'), ylabel('SECOND OUTPUT');
+title('Pareto Frontier of Current vs Force');
+xlabel('Current'), ylabel('Force');

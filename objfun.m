@@ -36,7 +36,7 @@ current_tot = current_tot(2:end);
 % current_tens = current_tens(2:end);
 % current_ac = current_ac(2:end);
 force_v = force_v(2:end);
-current = trapz(time(1:end-1), current_tot);
+current = -1*trapz(time(1:end-1), current_tot);
 force9 = n_weft*mean(force_v);
 end
 
