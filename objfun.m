@@ -8,15 +8,15 @@ e31 = 0.034; %C m^-2
 e33 = 7.97 * 10^-9; %F m^-1
 kwarp = 1250; %N m^-1
 
-dwarp = 0.0005;
+dwarp = 0.0001;
 
 time = 0:1/30:1/30*36;
 current_tot = zeros(1,37);
 force_v = zeros(1,37);
-current_curv = zeros(1,37);
-current_tens = zeros(1,37);
-current_ac = zeros(1,37);
-timestep=1/30;
+% current_curv = zeros(1,37);
+% current_tens = zeros(1,37);
+% current_ac = zeros(1,37);
+% timestep=1/30;
 b = x(1)*dwarp;
 hpoly = x(3)*dwarp; %micrometer
 hpiezo = x(4)*dwarp; %micrometer
