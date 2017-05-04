@@ -23,7 +23,7 @@ ub = [5, 5, 0.5, 0.5];
 % Call the NSGA optimizer
 % Pareto is a matrix of design variables - each row is a solution (P x 5)
 % fVals is a matrix of function values at the Pareto front (P x 2)
- options = optimoptions(@gamultiobj,'PlotFcn', @gaplotpareto,  'PopulationSize', 30, 'Generations', 100);
+ options = optimoptions(@gamultiobj,  'PopulationSize', 25, 'Generations', 75,'Display', 'iter');
 
 [Pareto, fVals] = gamultiobj(@objfun, 4, A, b, Aeq, beq, lb, ub, options);
 

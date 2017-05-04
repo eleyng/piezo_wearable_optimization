@@ -8,7 +8,7 @@ e31 = 0.034; %C m^-2
 e33 = 7.97 * 10^-9; %F m^-1
 kwarp = 1250; %N m^-1
 
-dwarp = 0.0001;
+dwarp = 0.0006;
 
 time = 0:1/30:1/30*36;
 current_tot = zeros(1,37);
