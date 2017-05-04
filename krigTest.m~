@@ -1,0 +1,11 @@
+xTrain = [fVals(:,1), fVals(:,2)];
+yTrain = fVals(:,3);
+
+regr = @regpoly0;
+corr = @corrgauss;
+theta0 = 0.1;
+lob = 0.000001;
+upb = 10;
+
+[d_pareto, perf_current] = dacefit(xTrain, yTrain, regr, corr, theta0, lob, upb);
+
